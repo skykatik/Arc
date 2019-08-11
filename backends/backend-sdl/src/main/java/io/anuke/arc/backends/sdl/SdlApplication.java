@@ -34,17 +34,21 @@ public class SdlApplication implements Application{
         Core.input = this.input = new SdlInput();
         Core.settings = new Settings();
 
+        /*
         try{
             Core.audio = config.disableAudio ? new MockAudio() : new SdlAudio(config);
         }catch(Throwable t){
             Log.err(t);
             Log.err("Error initializing; disabling audio.");
             Core.audio = new MockAudio();
-        }
+        }*/
+        Core.audio = new MockAudio();
 
         initIcon();
 
         graphics.updateSize(config.width, config.height);
+
+        Soloud.test();
 
         try{
             loop();
