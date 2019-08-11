@@ -62,19 +62,10 @@ public class SdlAudio extends Audio{
             if(handle == 0) throw new SDLError();
         }
 
-        @Override
-        public long play(float volume, float pitch, float pan){
-            return play(volume, pitch, pan, false);
-        }
-
-        @Override
-        public long loop(float volume, float pitch, float pan){
-            return play(volume, pitch, pan, true);
-        }
-
         //doesn't support setting pitch at all.
         //fantastic.
-        long play(float volume, float pitch, float pan, boolean looping){
+        @Override
+        public int play(float volume, float pitch, float pan, boolean looping){
             if(Time.timeSinceMillis(lastPlay) < 16 * 3){
                 return -1;
             }
@@ -99,16 +90,16 @@ public class SdlAudio extends Audio{
 
         //don't care about any of these... yet
 
-        @Override public void stop(long soundId){}
-        @Override public void pause(long soundId){}
-        @Override public void resume(long soundId){}
+        @Override public void stop(int soundId){}
+        @Override public void pause(int soundId){}
+        @Override public void resume(int soundId){}
         @Override public void stop(){}
         @Override public void pause(){}
         @Override public void resume(){}
-        @Override public void setLooping(long soundId, boolean looping){}
-        @Override public void setPitch(long soundId, float pitch){}
-        @Override public void setVolume(long soundId, float volume){}
-        @Override public void setPan(long soundId, float pan, float volume){}
+        @Override public void setLooping(int soundId, boolean looping){}
+        @Override public void setPitch(int soundId, float pitch){}
+        @Override public void setVolume(int soundId, float volume){}
+        @Override public void setPan(int soundId, float pan, float volume){}
     }
 
     public class SdlMusic implements Music{

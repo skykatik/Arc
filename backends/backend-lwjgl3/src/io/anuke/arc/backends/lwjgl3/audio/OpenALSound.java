@@ -33,41 +33,6 @@ public class OpenALSound implements Sound{
         }
     }
 
-    public long play(float volume){
-        if(audio.noDevice) return 0;
-        int sourceID = audio.obtainSource(false);
-        if(sourceID == -1){
-            // Attempt to recover by stopping the least recently played sound
-            audio.retain(this, true);
-            sourceID = audio.obtainSource(false);
-        }else audio.retain(this, false);
-        // In case it still didn't work
-        if(sourceID == -1) return -1;
-        long soundId = audio.getSoundId(sourceID);
-        alSourcei(sourceID, AL_BUFFER, bufferID);
-        alSourcei(sourceID, AL_LOOPING, AL_FALSE);
-        alSourcef(sourceID, AL_GAIN, volume);
-        alSourcePlay(sourceID);
-        return soundId;
-    }
-
-    public long loop(){
-        return loop(1);
-    }
-
-    @Override
-    public long loop(float volume){
-        if(audio.noDevice) return 0;
-        int sourceID = audio.obtainSource(false);
-        if(sourceID == -1) return -1;
-        long soundId = audio.getSoundId(sourceID);
-        alSourcei(sourceID, AL_BUFFER, bufferID);
-        alSourcei(sourceID, AL_LOOPING, AL_TRUE);
-        alSourcef(sourceID, AL_GAIN, volume);
-        alSourcePlay(sourceID);
-        return soundId;
-    }
-
     public void stop(){
         if(audio.noDevice) return;
         audio.stopSourcesWithBuffer(bufferID);
@@ -83,7 +48,7 @@ public class OpenALSound implements Sound{
     }
 
     @Override
-    public void stop(long soundId){
+    public void stop(int soundId){
         if(audio.noDevice) return;
         audio.stopSound(soundId);
     }
@@ -95,7 +60,7 @@ public class OpenALSound implements Sound{
     }
 
     @Override
-    public void pause(long soundId){
+    public void pause(int soundId){
         if(audio.noDevice) return;
         audio.pauseSound(soundId);
     }
@@ -107,49 +72,55 @@ public class OpenALSound implements Sound{
     }
 
     @Override
-    public void resume(long soundId){
+    public void resume(int soundId){
         if(audio.noDevice) return;
         audio.resumeSound(soundId);
     }
 
     @Override
-    public void setPitch(long soundId, float pitch){
+    public void setPitch(int soundId, float pitch){
         if(audio.noDevice) return;
         audio.setSoundPitch(soundId, pitch);
     }
 
     @Override
-    public void setVolume(long soundId, float volume){
+    public void setVolume(int soundId, float volume){
         if(audio.noDevice) return;
         audio.setSoundGain(soundId, volume);
     }
 
     @Override
-    public void setLooping(long soundId, boolean looping){
+    public void setLooping(int soundId, boolean looping){
         if(audio.noDevice) return;
         audio.setSoundLooping(soundId, looping);
     }
 
     @Override
-    public void setPan(long soundId, float pan, float volume){
+    public void setPan(int soundId, float pan, float volume){
         if(audio.noDevice) return;
         audio.setSoundPan(soundId, pan, volume);
     }
 
     @Override
-    public long play(float volume, float pitch, float pan){
-        long id = play();
-        setPitch(id, pitch);
-        setPan(id, pan, volume);
-        return id;
-    }
+    public int play(float volume, float pitch, float pan, boolean loop){
+        if(audio.noDevice) return 0;
+        int sourceID = audio.obtainSource(false);
+        if(sourceID == -1){
+            // Attempt to recover by stopping the least recently played sound
+            audio.retain(this, true);
+            sourceID = audio.obtainSource(false);
+        }else audio.retain(this, false);
+        // In case it still didn't work
+        if(sourceID == -1) return -1;
+        int soundId = (int)audio.getSoundId(sourceID);
+        alSourcei(sourceID, AL_BUFFER, bufferID);
+        alSourcei(sourceID, AL_LOOPING, loop ? AL_TRUE : AL_FALSE);
+        alSourcef(sourceID, AL_GAIN, volume);
+        alSourcePlay(sourceID);
 
-    @Override
-    public long loop(float volume, float pitch, float pan){
-        long id = loop();
-        setPitch(id, pitch);
-        setPan(id, pan, volume);
-        return id;
+        setPitch(sourceID, pitch);
+        setPan(sourceID, pan, volume);
+        return soundId;
     }
 
     /** Returns the length of the sound in seconds. */

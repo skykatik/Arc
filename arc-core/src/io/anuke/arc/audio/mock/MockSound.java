@@ -9,37 +9,12 @@ import io.anuke.arc.audio.*;
 public class MockSound implements Sound{
 
     @Override
-    public long at(float x, float y){
+    public int at(float x, float y, float pitch){
         return 0;
     }
 
     @Override
-    public long play(){
-        return 0;
-    }
-
-    @Override
-    public long play(float volume){
-        return 0;
-    }
-
-    @Override
-    public long play(float volume, float pitch, float pan){
-        return 0;
-    }
-
-    @Override
-    public long loop(){
-        return 0;
-    }
-
-    @Override
-    public long loop(float volume){
-        return 0;
-    }
-
-    @Override
-    public long loop(float volume, float pitch, float pan){
+    public int play(float volume, float pitch, float pan, boolean looping){
         return 0;
     }
 
@@ -64,37 +39,37 @@ public class MockSound implements Sound{
     }
 
     @Override
-    public void stop(long soundId){
+    public void stop(int soundId){
 
     }
 
     @Override
-    public void pause(long soundId){
+    public void pause(int soundId){
 
     }
 
     @Override
-    public void resume(long soundId){
+    public void resume(int soundId){
 
     }
 
     @Override
-    public void setLooping(long soundId, boolean looping){
+    public void setLooping(int soundId, boolean looping){
 
     }
 
     @Override
-    public void setPitch(long soundId, float pitch){
+    public void setPitch(int soundId, float pitch){
 
     }
 
     @Override
-    public void setVolume(long soundId, float volume){
+    public void setVolume(int soundId, float volume){
 
     }
 
     @Override
-    public void setPan(long soundId, float pan, float volume){
+    public void setPan(int soundId, float pan, float volume){
 
     }
 }
