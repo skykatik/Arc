@@ -1,5 +1,6 @@
 import com.badlogic.gdx.jnigen.*;
 import com.badlogic.gdx.jnigen.BuildTarget.*;
+import io.anuke.arc.files.*;
 import io.anuke.arc.util.*;
 
 import java.io.*;
@@ -12,9 +13,9 @@ class NativesBuild{
     static final String win32crossCompilePath = "/usr/local/cross-tools/i686-w64-mingw32/bin/";
     static final String win64crossCompilePath = "/usr/local/cross-tools/x86_64-w64-mingw32/bin/";
     static final String minSDLversion = "2.0.9";
-    static final String libsLinux = " -lGLEW -lGLU -lGL -lSDL2_mixer -lsoloud";
-    static final String libsMac = " -lGLEW -lSDL2_mixer";
-    static final String libsWin = " -lglew32s -lglu32 -lopengl32 -lSDL2_mixer -lwinmm -lsoloud"; //absolutely disgusting amount of libraries required here
+    static final String libsLinux = " -lGLEW -lGLU -lGL -lsoloud";
+    static final String libsMac = " -lGLEW";
+    static final String libsWin = " -lglew32s -lglu32 -lopengl32"; //absolutely disgusting amount of libraries required here
     static final String macLibPath = "/usr/local/lib/libSDL2.a";
     static final boolean compileMac = OS.isMac;
 
@@ -28,9 +29,11 @@ class NativesBuild{
         checkSDLVersion(win32crossCompilePath + "sdl2-config", minSDLversion);
         checkSDLVersion(win64crossCompilePath + "sdl2-config", minSDLversion);
 
+        new FileHandle("jni/src").deleteDirectory();
+        new FileHandle("soloudsrc/src").copyTo(new FileHandle("jni"));
+
         lin64.cIncludes = new String[]{};
-        lin64.cFlags = lin64.cFlags + " " + execCmd("sdl2-config --cflags");
-        lin64.cppFlags = lin64.cFlags;
+        lin64.cFlags = lin64.cppFlags = lin64.cFlags + " -DWITH_SDL2_STATIC " + execCmd("sdl2-config --cflags");
         lin64.linkerFlags = "-shared -m64";
         lin64.libraries = execCmd("sdl2-config --static-libs").replace("-lSDL2", "-l:libSDL2.a") + libsLinux;
 
@@ -40,19 +43,20 @@ class NativesBuild{
         mac64.linkerFlags = "-shared -arch x86_64 -mmacosx-version-min=10.6";
         mac64.libraries = macLibPath + " -lm -liconv -Wl,-framework,CoreAudio -Wl,-framework,OpenGL,-framework,AudioToolbox -Wl,-framework,ForceFeedback -lobjc -Wl,-framework,CoreVideo -Wl,-framework,Cocoa -Wl,-framework,Carbon -Wl,-framework,IOKit -Wl,-weak_framework,QuartzCore -Wl,-weak_framework,Metal"  + libsMac;
 
-        win32.cFlags = win32.cFlags + " -Wl,--unresolved-symbols=all " + execCmd(win32crossCompilePath + "sdl2-config --cflags");
-        win32.cppFlags = win32.cFlags;
-        win32.libraries = execCmd(win32crossCompilePath + "sdl2-config --static-libs") + libsWin;
-
-        win64.cFlags = win64.cFlags + " -Wl,--unresolved-symbols=ignore-all " + execCmd(win64crossCompilePath + "sdl2-config --cflags");
-        win64.cppFlags = win64.cFlags;
+        win64.cppIncludes = win64.cIncludes = new FileHandle("jni/src").listAll().map(f -> f.path().substring("jni/".length())).toArray(String.class);
+        win64.cFlags =  win64.cppFlags = win64.cFlags + " -DWITH_SDL2_STATIC -Wl,--unresolved-symbols=ignore-all " + execCmd(win64crossCompilePath + "sdl2-config --cflags");
         win64.libraries = execCmd(win64crossCompilePath + "sdl2-config --static-libs")  + libsWin;
+
+        win32.cppIncludes = win64.cIncludes;
+        win32.cppFlags = win32.cFlags = win32.cFlags + " -DWITH_SDL2_STATIC -Wl,--unresolved-symbols=all " + execCmd(win32crossCompilePath + "sdl2-config --cflags");
+        win32.libraries = execCmd(win32crossCompilePath + "sdl2-config --static-libs") + libsWin;
 
         new NativeCodeGenerator().generate("src/main/java", "build/classes/java/main", "jni");
         new AntScriptGenerator().generate(new BuildConfig("sdl-arc"), win32, win64, lin64, mac64);
 
         //new FileHandle("jni/build-windows32.xml").writeString(new FileHandle("jni/build-windows32.xml").readString().replace("-Wl,--no-undefined ", ""));
        // new FileHandle("jni/build-windows64.xml").writeString(new FileHandle("jni/build-windows64.xml").readString().replace("-Wl,--no-undefined ", ""));
+
 
         BuildExecutor.executeAnt("jni/build-windows32.xml", "-Dhas-compiler=true -Drelease=true clean postcompile");
         BuildExecutor.executeAnt("jni/build-windows64.xml", "-Dhas-compiler=true -Drelease=true clean postcompile");

@@ -1,13 +1,8 @@
 package io.anuke.arc.backends.sdl;
 
-import io.anuke.arc.*;
-import io.anuke.arc.audio.*;
-import io.anuke.arc.files.*;
-import io.anuke.arc.util.*;
-import sdl.*;
-
-public class SdlAudio extends Audio{
-    private SdlMusic currentlyPlaying;
+public class SdlAudio{
+    //private SdlMusic currentlyPlaying;
+    /*
 
     public SdlAudio(SdlConfig config){
         int i = SDLMixer.openAudio(22050*2, 2, config.audioDeviceBufferSize);
@@ -194,5 +189,5 @@ public class SdlAudio extends Audio{
         public void setCompletionListener(OnCompletionListener listener){
             this.listener = listener;
         }
-    }
+    }*/
 }

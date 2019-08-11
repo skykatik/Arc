@@ -3,6 +3,7 @@ package io.anuke.arc.files;
 import io.anuke.arc.Core;
 import io.anuke.arc.Files;
 import io.anuke.arc.Files.FileType;
+import io.anuke.arc.collection.*;
 import io.anuke.arc.function.Consumer;
 import io.anuke.arc.graphics.*;
 import io.anuke.arc.util.ArcRuntimeException;
@@ -512,6 +513,12 @@ public class FileHandle{
         }finally{
             Streams.closeQuietly(output);
         }
+    }
+
+    public Array<FileHandle> listAll(){
+        Array<FileHandle> list = new Array<>();
+        walk(list::add);
+        return list;
     }
 
     /** Recursively iterates through all files in this directory.
