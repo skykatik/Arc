@@ -15,7 +15,7 @@ class NativesBuild{
     static final String minSDLversion = "2.0.9";
     static final String libsLinux = " -lGLEW -lGLU -lGL -lsoloud";
     static final String libsMac = " -lGLEW";
-    static final String libsWin = " -lglew32s -lglu32 -lopengl32"; //absolutely disgusting amount of libraries required here
+    static final String libsWin = " -lglew32s -lglu32 -lopengl32 -lsoloud";
     static final String macLibPath = "/usr/local/lib/libSDL2.a";
     static final boolean compileMac = OS.isMac;
 
@@ -58,9 +58,9 @@ class NativesBuild{
        // new FileHandle("jni/build-windows64.xml").writeString(new FileHandle("jni/build-windows64.xml").readString().replace("-Wl,--no-undefined ", ""));
 
 
-        BuildExecutor.executeAnt("jni/build-windows32.xml", "-Dhas-compiler=true -Drelease=true clean postcompile");
-        BuildExecutor.executeAnt("jni/build-windows64.xml", "-Dhas-compiler=true -Drelease=true clean postcompile");
-        BuildExecutor.executeAnt("jni/build-linux64.xml", "-Dhas-compiler=true -Drelease=true clean postcompile");
+        BuildExecutor.executeAnt("jni/build-windows32.xml", "-Dhas-compiler=true -Drelease=true clean postcompile", "-v");
+        //BuildExecutor.executeAnt("jni/build-windows64.xml", "-Dhas-compiler=true -Drelease=true clean postcompile");
+        //BuildExecutor.executeAnt("jni/build-linux64.xml", "-Dhas-compiler=true -Drelease=true clean postcompile");
         if(compileMac) BuildExecutor.executeAnt("jni/build-macosx64.xml", "-Dhas-compiler=true -Drelease=true clean postcompile");
     }
 
