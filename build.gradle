@@ -1,6 +1,14 @@
 ext{
     versions = [:]
     libraries = [:]
+
+    arcProject = { String name ->
+        if(findProject(":arc-core") != null){
+            return project(name)
+        }else{
+            return project(":Arc" + name)
+        }
+    }
 }
 
 versions.robovm = "2.3.7"
@@ -13,6 +21,7 @@ versions.junit = "4.11"
 versions.androidPlugin = "3.4.0"
 versions.androidSdk = 28
 versions.androidBuildTools = "28.0.3"
+versions.javaparser = "2.3.0"
 
 libraries.lwjgl3 = [
         "org.lwjgl:lwjgl:${versions.lwjgl3}",
@@ -60,6 +69,10 @@ libraries.gwt = [
 
 libraries.junit = [
         "junit:junit:${versions.junit}"
+]
+
+libraries.jnigen = [
+        "com.github.javaparser:javaparser-core:${versions.javaparser}"
 ]
 
 allprojects{

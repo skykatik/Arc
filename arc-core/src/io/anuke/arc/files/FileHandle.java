@@ -52,7 +52,7 @@ public class FileHandle{
         this.type = FileType.Absolute;
     }
 
-    protected FileHandle(String fileName, FileType type){
+    public FileHandle(String fileName, FileType type){
         this.type = type;
         file = new File(fileName);
     }
@@ -669,10 +669,10 @@ public class FileHandle{
     }
 
     /** @throws ArcRuntimeException if this file handle is a {@link FileType#Classpath} or {@link FileType#Internal} file. */
-    public void mkdirs(){
+    public boolean mkdirs(){
         if(type == FileType.Classpath) throw new ArcRuntimeException("Cannot mkdirs with a classpath file: " + file);
         if(type == FileType.Internal) throw new ArcRuntimeException("Cannot mkdirs with an internal file: " + file);
-        file().mkdirs();
+        return file().mkdirs();
     }
 
     /**

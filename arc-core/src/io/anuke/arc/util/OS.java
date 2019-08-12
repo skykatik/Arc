@@ -9,11 +9,8 @@ public class OS{
     public static boolean isMac = getPropertyNotNull("os.name").contains("Mac");
     public static boolean isIos = false;
     public static boolean isAndroid = false;
-    public static boolean isARM = getPropertyNotNull("os.arch").startsWith("arm");
-    public static boolean is64Bit = getPropertyNotNull("os.arch").equals("amd64") || getPropertyNotNull("os.arch").equals("x86_64");
-
-    // JDK 8 only.
-    public static String abi = (getPropertyNotNull("sun.arch.abi") != null ? getPropertyNotNull("sun.arch.abi") : "");
+    static public boolean isARM = System.getProperty("os.arch").startsWith("arm") || System.getProperty("os.arch").startsWith("aarch64");
+    static public boolean is64Bit = System.getProperty("os.arch").contains("64") || System.getProperty("os.arch").startsWith("armv8");
 
     static{
         boolean isMOEiOS = "iOS".equals(getPropertyNotNull("moe.platform.name"));

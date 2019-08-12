@@ -3,18 +3,14 @@ apply plugin: "java"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-sourceSets.main.java.srcDirs = ["src/main/java"]
+sourceSets.main.java.srcDirs = ["src/main"]
+sourceSets.test.java.srcDirs = ["src/test"]
 sourceSets.main.resources.srcDirs = ["libs/linux32", "libs/linux64",
                                       "libs/macosx32", "libs/macosx64","libs/windows32", "libs/windows64"]
 
-dependencies {
-    testCompile "com.badlogicgames.gdx:gdx-jnigen:1.9.10"
-
-    if(findProject(":arc-core") != null){
-        testCompile project(":arc-core")
-    }else{
-        testCompile project(":Arc:arc-core")
-    }
+dependencies{
+    testCompile arcProject(":extensions:jnigen")
+    testCompile arcProject(":arc-core")
 }
 
 task deleteJniFolder(type: Delete) {

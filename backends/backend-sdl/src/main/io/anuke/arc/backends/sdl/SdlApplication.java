@@ -2,11 +2,11 @@ package io.anuke.arc.backends.sdl;
 
 import io.anuke.arc.*;
 import io.anuke.arc.audio.mock.*;
+import io.anuke.arc.backends.sdl.jni.*;
 import io.anuke.arc.collection.*;
 import io.anuke.arc.function.*;
 import io.anuke.arc.graphics.*;
 import io.anuke.arc.util.*;
-import sdl.*;
 
 public class SdlApplication implements Application{
     private final Array<ApplicationListener> listeners = new Array<>();

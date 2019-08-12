@@ -1,8 +1,8 @@
 package io.anuke.arc.backends.sdl;
 
 import io.anuke.arc.*;
+import io.anuke.arc.backends.sdl.jni.*;
 import io.anuke.arc.input.*;
-import sdl.*;
 
 import java.nio.charset.*;
 

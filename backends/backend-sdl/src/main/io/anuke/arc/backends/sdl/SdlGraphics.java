@@ -2,11 +2,11 @@ package io.anuke.arc.backends.sdl;
 
 import io.anuke.arc.*;
 import io.anuke.arc.Graphics.Cursor.*;
+import io.anuke.arc.backends.sdl.jni.*;
 import io.anuke.arc.collection.*;
 import io.anuke.arc.graphics.*;
 import io.anuke.arc.graphics.glutils.*;
 import io.anuke.arc.util.*;
-import sdl.*;
 
 public class SdlGraphics extends Graphics{
     private GL20 gl20;

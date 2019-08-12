@@ -1,12 +1,13 @@
 package io.anuke.arc.backends.sdl;
 
+import io.anuke.arc.backends.sdl.jni.*;
 import io.anuke.arc.graphics.*;
-import sdl.*;
 
 import java.nio.*;
 
 public class SdlGL20 implements GL20{
-    @Override public void glActiveTexture(int texture){SDLGL.glActiveTexture(texture);}
+    @Override public void glActiveTexture(int texture){
+        SDLGL.glActiveTexture(texture);}
 
     @Override public void glBindTexture(int target, int texture){SDLGL.glBindTexture(target, texture);}
 

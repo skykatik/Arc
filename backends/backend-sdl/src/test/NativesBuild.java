@@ -1,7 +1,7 @@
-import com.badlogic.gdx.jnigen.*;
-import com.badlogic.gdx.jnigen.BuildTarget.*;
 import io.anuke.arc.files.*;
 import io.anuke.arc.util.*;
+import io.anuke.jnigen.*;
+import io.anuke.jnigen.BuildTarget.*;
 
 import java.io.*;
 import java.util.*;
@@ -51,7 +51,7 @@ class NativesBuild{
         win32.cppFlags = win32.cFlags = win32.cFlags + " -DWITH_SDL2_STATIC -Wl,--unresolved-symbols=all " + execCmd(win32crossCompilePath + "sdl2-config --cflags");
         win32.libraries = execCmd(win32crossCompilePath + "sdl2-config --static-libs") + libsWin;
 
-        new NativeCodeGenerator().generate("src/main/java", "build/classes/java/main", "jni");
+        new NativeCodeGenerator().generate("src/main", "build/classes/java/main", "jni");
         new AntScriptGenerator().generate(new BuildConfig("sdl-arc"), win32, win64, lin64, mac64);
 
         //new FileHandle("jni/build-windows32.xml").writeString(new FileHandle("jni/build-windows32.xml").readString().replace("-Wl,--no-undefined ", ""));
