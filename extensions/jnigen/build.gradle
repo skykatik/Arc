@@ -1,0 +1,6 @@
+sourceSets.main.java.srcDirs = ["src/main"]
+sourceSets.main.resources.srcDirs = ["src/resources"]
+
+dependencies {
+    compile libraries.jnigen
+}
