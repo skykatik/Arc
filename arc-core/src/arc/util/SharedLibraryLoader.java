@@ -21,9 +21,7 @@ public class SharedLibraryLoader{
     public SharedLibraryLoader(){
     }
 
-    /**
-     * Fetches the natives from the given natives jar file. Used for testing a shared lib on the fly.
-     */
+    /** Fetches the natives from the given natives jar file. Used for testing a shared lib on the fly. */
     public SharedLibraryLoader(String nativesJar){
         this.nativesJar = nativesJar;
     }

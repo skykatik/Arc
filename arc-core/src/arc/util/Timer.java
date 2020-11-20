@@ -239,10 +239,7 @@ public class Timer{
             if(app == null) throw new IllegalStateException("Core.app not available.");
         }
 
-        /**
-         * If this is the last time the task will be ran or the task is first cancelled, it may be scheduled again in this
-         * method.
-         */
+        /** If this is the last time the task will be ran or the task is first cancelled, it may be scheduled again in this method. */
         abstract public void run();
 
         /** Cancels the task. It will not be executed until it is scheduled again. This method can be called at any time. */

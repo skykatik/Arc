@@ -49,7 +49,7 @@ public class Structs{
         return total;
     }
 
-    /**Uses identity comparisons.*/
+    /** Uses identity comparisons. */
     public static <T> boolean contains(T[] array, T value){
         for(T t : array){
             if(t == value || (value != null && value.equals(t))) return true;

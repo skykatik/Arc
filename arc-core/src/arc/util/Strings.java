@@ -291,8 +291,10 @@ public class Strings{
         return result.toString();
     }
 
-    /**Converts a snake_case or kebab-case string to Upper Case.
-     * For example: "test_string" -> "Test String"*/
+    /**
+     * Converts a snake_case or kebab-case string to Upper Case.
+     * For example: "test_string" -> "Test String"
+     */
     public static String capitalize(String s){
         StringBuilder result = new StringBuilder(s.length());
 
@@ -327,8 +329,10 @@ public class Strings{
         return result.toString();
     }
 
-    /**Converts a Space Separated string to camelCase.
-     * For example: "Camel Case" -> "camelCase"*/
+    /**
+     * Converts a Space Separated string to camelCase.
+     * For example: "Camel Case" -> "camelCase"
+     */
     public static String camelize(String s){
         StringBuilder result = new StringBuilder(s.length());
 

@@ -1,7 +1,7 @@
 package arc.util;
 
 /**
- * A pausable thread. The runnable must not execute an infinite loop but should return control to the thread as often as possible
+ * A pauseable thread. The runnable must not execute an infinite loop but should return control to the thread as often as possible
  * so that the thread can actually pause.
  * @author mzechner
  */

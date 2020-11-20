@@ -11,7 +11,7 @@ public class CommandHandler{
     private final Seq<Command> orderedCommands = new Seq<>();
     private String prefix;
 
-    /** Creates a command handler with a specific command prefix.*/
+    /** Creates a command handler with a specific command prefix. */
     public CommandHandler(String prefix){
         this.prefix = prefix;
     }
@@ -20,13 +20,15 @@ public class CommandHandler{
         this.prefix = prefix;
     }
 
-    /** Handles a message with no additional parameters.*/
+    /** Handles a message with no additional parameters. */
     public CommandResponse handleMessage(String message){
         return handleMessage(message, null);
     }
 
-    /** Handles a message with optional extra parameters. Runs the command if successful.
-     * @return a response detailing whether or not the command was handled, and what went wrong, if applicable. */
+    /**
+     * Handles a message with optional extra parameters. Runs the command if successful.
+     * @return a response detailing whether or not the command was handled, and what went wrong, if applicable.
+     */
     public CommandResponse handleMessage(String message, Object params){
         if(message == null || (!message.startsWith(prefix)))
             return new CommandResponse(ResponseType.noCommand, null, null);
@@ -101,14 +103,16 @@ public class CommandHandler{
         return cmd;
     }
 
-    /** Register a command which handles a list of arguments and one handler-specific parameter. <br>
+    /**
+     * Register a command which handles a list of arguments and one handler-specific parameter. <br>
      * argeter syntax is as follows: <br>
      * &lt;mandatory-arg-1&gt; &lt;mandatory-arg-2&gt; ... &lt;mandatory-arg-n&gt; [optional-arg-1] [optional-arg-2] <br>
      * Angle brackets indicate mandatory arguments. Square brackets to indicate optional arguments. <br>
      * All mandatory arguments must come before optional arguments. Arg names must not have spaces in them. <br>
-     * You may also use the ... syntax after the arg name to designate that everything after it will not be split into extra arguments. 
+     * You may also use the ... syntax after the arg name to designate that everything after it will not be split into extra arguments.
      * There may only be one such argument, and it must be at the end. For example, the syntax
-     * &lt;arg1&gt [arg2...] will require a first argument, and then take any text after that and put it in the second argument, optionally.*/
+     * &lt;arg1&gt [arg2...] will require a first argument, and then take any text after that and put it in the second argument, optionally.
+     */
     public <T> Command register(String text, String params, String description, CommandRunner<T> runner){
         Command cmd = new Command(text, params, description, runner);
         commands.put(text.toLowerCase(), cmd);

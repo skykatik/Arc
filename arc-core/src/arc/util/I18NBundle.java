@@ -57,9 +57,7 @@ public class I18NBundle{
     /** The formatter used for argument replacement. */
     private TextFormatter formatter;
 
-    /**
-     * Returns the flag indicating whether to use the simplified message pattern syntax (default is false).
-     */
+    /** Returns the flag indicating whether to use the simplified message pattern syntax (default is false). */
     public static boolean getSimpleFormatter(){
         return simpleFormatter;
     }
@@ -382,9 +380,7 @@ public class I18NBundle{
         return locale;
     }
 
-    /**
-     * Sets the bundle locale. This method is private because a bundle can't change the locale during its life.
-     */
+    /** Sets the bundle locale. This method is private because a bundle can't change the locale during its life. */
     private void setLocale(Locale locale){
         this.locale = locale;
         this.formatter = new TextFormatter(locale, !simpleFormatter);
@@ -424,7 +420,7 @@ public class I18NBundle{
         return s;
     }
 
-    /**Returns all keys in this bundle. Does not check parent bundles.*/
+    /** Returns all keys in this bundle. Does not check parent bundles. */
     public Iterable<String> getKeys(){
         return properties.keys();
     }
@@ -463,7 +459,7 @@ public class I18NBundle{
         return formatter.format(get(key), args);
     }
 
-    /**Format, but with a number with fixed decimal places.*/
+    /** Format, but with a number with fixed decimal places. */
     public String formatFloat(String key, float value, int places){
         return formatter.format(get(key), Strings.fixed(value, places));
     }
