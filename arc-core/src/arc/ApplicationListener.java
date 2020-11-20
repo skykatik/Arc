@@ -51,9 +51,7 @@ public interface ApplicationListener{
     default void dispose(){
     }
 
-    /**
-     * Called when an external file is dropped into the window, e.g from the desktop.
-     */
+    /** Called when an external file is dropped into the window, e.g from the desktop. */
     default void fileDropped(Fi file){
     }
 }

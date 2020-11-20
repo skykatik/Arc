@@ -29,7 +29,6 @@ public class Net{
 
     /**
      * Process the specified {@link HttpRequest} and reports the {@link HttpResponse} to the specified listener.
-     * .
      * @param httpRequest The {@link HttpRequest} to be performed.
      * @param success The listener to call once the HTTP response is ready to be processed.
      * @param failure The listener to call if the request fails.
@@ -104,22 +103,28 @@ public class Net{
         /** The URL to send this request to.*/
         public String url;
         public ObjectMap<String, String> headers = new ObjectMap<>();
-        /**The time to wait for the HTTP request to be processed, use 0 to block until it is done. The timeout is used for both
-         * the timeout when establishing TCP connection, and the timeout until the first byte of data is received.*/
+        /**
+         * The time to wait for the HTTP request to be processed, use 0 to block until it is done. The timeout is used for both
+         * the timeout when establishing TCP connection, and the timeout until the first byte of data is received.
+         */
         public int timeout = 2000;
 
-        /**The content to be used in the HTTP request: A string encoded in the corresponding Content-Encoding set in the headers, with the data to send with the
+        /**
+         * The content to be used in the HTTP request: A string encoded in the corresponding Content-Encoding set in the headers, with the data to send with the
          * HTTP request. For example, in case of HTTP GET, the content is used as the query string of the GET while on a
-         * HTTP POST it is used to send the POST data.*/
+         * HTTP POST it is used to send the POST data.
+         */
         public String content;
 
-        /**The content as a stream to be used for a POST for example, to transmit custom data.*/
+        /** The content as a stream to be used for a POST for example, to transmit custom data. */
         public InputStream contentStream;
-        /**Length of the content stream.*/
+        /** Length of the content stream. */
         public long contentLength;
 
-        /**Sets whether 301 and 302 redirects are followed. By default true. Can't be changed in the web backend because this uses
-         * XmlHttpRequests which always redirect.*/
+        /**
+         * Sets whether 301 and 302 redirects are followed. By default true. Can't be changed in the web backend because this uses
+         * XmlHttpRequests which always redirect.
+         */
         public boolean followRedirects = true;
         /** Whether a cross-origin request will include credentials. By default false. */
         public boolean includeCredentials = false;
@@ -166,7 +171,7 @@ public class Net{
         }
     }
 
-    /** Defines the status of an HTTP request.*/
+    /** Defines the status of an HTTP request. */
     public enum HttpStatus{
         UNKNOWN_STATUS(-1),
 

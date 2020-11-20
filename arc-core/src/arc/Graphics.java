@@ -41,13 +41,13 @@ public abstract class Graphics implements Disposable{
     /** @return the {@link GL20} instance */
     public abstract GL20 getGL20();
 
-    /** Set the GL20 instance **/
+    /** Set the GL20 instance */
     public abstract void setGL20(GL20 gl20);
 
     /** @return the {@link GL30} instance or null if not supported */
     public abstract GL30 getGL30();
 
-    /** Set the GL30 instance **/
+    /** Set the GL30 instance */
     public abstract void setGL30(GL30 gl30);
 
     /** Clears the color buffer using the specified color. */
@@ -77,7 +77,8 @@ public abstract class Graphics implements Disposable{
         return (float)getWidth() / getHeight();
     }
 
-    /** @return whether the window is 'hidden', e.g. whether width or height of the window is less than 2.
+    /**
+     * @return whether the window is 'hidden', e.g. whether width or height of the window is less than 2.
      * This is due to Windows reporting window size as 0 or 1 when minimized. This causes framebuffers to crash if resized.
      */
     public boolean isHidden(){
@@ -134,7 +135,7 @@ public abstract class Graphics implements Disposable{
      */
     public abstract boolean supportsDisplayModeChange();
 
-    /** @return the primary monitor **/
+    /** @return the primary monitor */
     public abstract Monitor getPrimaryMonitor();
 
     /** @return the monitor the application's window is located on */
@@ -337,12 +338,12 @@ public abstract class Graphics implements Disposable{
         return newCursor(new Pixmap(Core.files.internal("cursors/" + filename + ".png")), scaling, outlineColor, outlineScaling);
     }
 
-    /**Sets the cursor to the default value, e.g. {@link SystemCursor#arrow}.*/
+    /** Sets the cursor to the default value, e.g. {@link SystemCursor#arrow}. */
     public void restoreCursor(){
         cursor(SystemCursor.arrow);
     }
 
-    /**Sets the display cursor.*/
+    /** Sets the display cursor. */
     public void cursor(Cursor cursor){
         if(lastCursor == cursor) return;
 
@@ -368,8 +369,7 @@ public abstract class Graphics implements Disposable{
      */
     protected abstract void setCursor(Cursor cursor);
 
-    /**Sets one of the predefined {@link SystemCursor}s.
-     * Internal use only!*/
+    /** Sets one of the predefined {@link SystemCursor}s. Internal use only! */
     protected abstract void setSystemCursor(SystemCursor systemCursor);
 
     @Override
@@ -384,13 +384,13 @@ public abstract class Graphics implements Disposable{
      * @author mzechner
      */
     public static class DisplayMode{
-        /** the width in physical pixels **/
+        /** the width in physical pixels */
         public final int width;
-        /** the height in physical pixles **/
+        /** the height in physical pixeles */
         public final int height;
-        /** the refresh rate in Hertz **/
+        /** the refresh rate in Hertz */
         public final int refreshRate;
-        /** the number of bits per pixel, may exclude alpha **/
+        /** the number of bits per pixel, may exclude alpha */
         public final int bitsPerPixel;
 
         public DisplayMode(int width, int height, int refreshRate, int bitsPerPixel){
@@ -423,11 +423,11 @@ public abstract class Graphics implements Disposable{
 
     /** Class describing the bits per pixel, depth buffer precision, stencil precision and number of MSAA samples. */
     public static class BufferFormat{
-        /* number of bits per color channel */
+        /** number of bits per color channel */
         public final int r, g, b, a;
-        /* number of bits for depth and stencil buffer */
+        /** number of bits for depth and stencil buffer */
         public final int depth, stencil;
-        /** number of samples for multi-sample anti-aliasing (MSAA) **/
+        /** number of samples for multi-sample anti-aliasing (MSAA) */
         public final int samples;
         /** whether coverage sampling anti-aliasing is used. in that case you have to clear the coverage buffer as well! */
         public final boolean coverageSampling;
@@ -450,13 +450,11 @@ public abstract class Graphics implements Disposable{
     }
 
     /**
-     * <p>
      * Represents a mouse cursor. Create a cursor via
      * {@link Graphics#newCursor(Pixmap, int, int)}. To
      * set the cursor use {@link Graphics#setCursor(Cursor)}.
      * To use one of the system cursors, call Graphics#setSystemCursor
-     * </p>
-     **/
+     */
     public interface Cursor extends arc.util.Disposable{
 
         enum SystemCursor implements Cursor{
@@ -467,10 +465,10 @@ public abstract class Graphics implements Disposable{
             horizontalResize,
             verticalResize;
 
-            /**The override cursor to use when setting this cursor.*/
+            /** The override cursor to use when setting this cursor. */
             protected Cursor cursor;
 
-            /**Sets the alias for this cursor.*/
+            /** Sets the alias for this cursor. */
             public void set(Cursor cursor){
                 this.cursor = cursor;
             }

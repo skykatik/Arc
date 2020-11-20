@@ -44,15 +44,19 @@ public class Settings{
         appName = name;
     }
 
-    /**Sets the error handler function.
+    /**
+     * Sets the error handler function.
      * This function gets called when {@link #forceSave} or {@link #load} fails. This can occur most often on browsers,
-     * where extensions can block writing to local storage.*/
+     * where extensions can block writing to local storage.
+     */
     public void setErrorHandler(Cons<Throwable> handler){
         errorHandler = handler;
     }
 
-    /** Set whether the data should autosave immediately upon changing a value.
-     * Default value: true. */
+    /**
+     * Set whether the data should autosave immediately upon changing a value.
+     * Default value: true.
+     */
     public void setAutosave(boolean autosave){
         this.shouldAutosave = autosave;
     }

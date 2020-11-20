@@ -1,6 +1,5 @@
 package arc;
 
-
 import arc.struct.*;
 import arc.struct.ObjectMap.*;
 import arc.input.*;
@@ -91,9 +90,7 @@ public class KeyBinds{
         }
     }
 
-    /**
-     * Resets all keybinds to their default values.
-     */
+    /** Resets all keybinds to their default values. */
     public void resetToDefaults(){
         //remove pref values so it saves correctly
         for(Section sec : sections){
@@ -218,7 +215,7 @@ public class KeyBinds{
         public KeyCode min, max;
         public KeyCode key;
 
-        /** Cosntructor for axis-type keys only. */
+        /** Constructor for axis-type keys only. */
         public Axis(KeyCode key){
             this.key = key;
             this.min = max = null;

@@ -36,35 +36,35 @@ public abstract class Input implements Disposable{
     protected InputMultiplexer inputMultiplexer = new InputMultiplexer(keyboard);
     /** List of caught keys for Android. */
     protected IntSet caughtKeys = new IntSet();
-    /**Return Vec2 value for various functions.*/
+    /** Return Vec2 value for various functions. */
     protected Vec2 mouseReturn = new Vec2();
 
-    /**Returns the unprojected mouse position (screen -> world).*/
+    /** Returns the unprojected mouse position (screen -> world). */
     public Vec2 mouseWorld(float x, float y){
         return Core.camera.unproject(mouseReturn.set(x, y));
     }
 
-    /**Returns the projected mouse position (world -> screen).*/
+    /** Returns the projected mouse position (world -> screen). */
     public Vec2 mouseScreen(float x, float y){
         return Core.camera.project(mouseReturn.set(x, y));
     }
 
-    /** @return the unprojected mouse position in the world.*/
+    /** @return the unprojected mouse position in the world. */
     public float mouseWorldX(){
         return Core.camera.unproject(mouse()).x;
     }
 
-    /** @return the unprojected mouse position in the world.*/
+    /** @return the unprojected mouse position in the world. */
     public float mouseWorldY(){
         return Core.camera.unproject(mouse()).y;
     }
 
-    /**Returns the unprojected mouse position in the world.*/
+    /** Returns the unprojected mouse position in the world. */
     public Vec2 mouseWorld(){
         return Core.camera.unproject(mouse());
     }
 
-    /**Returns the mouse position as a Vec2.*/
+    /** Returns the mouse position as a Vec2. */
     public Vec2 mouse(){
         return mouseReturn.set(mouseX(), mouseY());
     }
@@ -207,8 +207,10 @@ public abstract class Input implements Disposable{
         }
     }
 
-    /** Returns the [-1, 1] axis value of a key.
-     * In the case of keyboard-based axes, this will only return a value if one of the axes was just pressed. */
+    /**
+     * Returns the [-1, 1] axis value of a key.
+     * In the case of keyboard-based axes, this will only return a value if one of the axes was just pressed.
+     */
     public float axisTap(KeyBind key){
         Axis axis = keybinds.get(key);
         if(axis.key != null){
@@ -391,8 +393,8 @@ public abstract class Input implements Disposable{
         public String title = "";
         public String text = "";
         public boolean numeric;
-        public Cons<String> accepted = s -> { };
-        public Runnable canceled = () -> { };
+        public Cons<String> accepted = s -> {};
+        public Runnable canceled = () -> {};
         public int maxLength = -1;
     }
 

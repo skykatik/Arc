@@ -12,7 +12,8 @@ import arc.util.I18NBundle;
 
 /**
  * Note that all resources are automatically disposed of in {@link Application#dispose()}.
- * There is no need to dispose of them manually.*/
+ * There is no need to dispose of them manually.
+ */
 public class Core{
     public static Application app;
     public static Graphics graphics;
